@@ -1,12 +1,29 @@
-interface Person {
-    firstName: string;
-    lastName: string;
+let pris = <HTMLInputElement> document.getElementById("pris")
+let BeregnAfgift_btn = document.getElementById("btn")
+let bilvalg = <HTMLSelectElement>document.getElementById("bilvalg")
+let afgiftTekst = <HTMLParagraphElement> document.getElementById("afgiftTekst")
+
+BeregnAfgift_btn.addEventListener("click", UdregnAfgift)
+
+function UdregnAfgift(){
+if(bilvalg.value == "personbil"){
+afgiftTekst.innerHTML = "Afgift: " + BilAfgift(Number(pris.value));
+console.log("123");
+
+}
+if(bilvalg.value == "elbil"){
+afgiftTekst.innerHTML = "Afgift: " + (BilAfgift(Number(pris.value)) * 0.2);
+}
 }
 
-function greeter(person: Person): string {
-    return "Hello, " + person.firstName + " " + person.lastName;
+function BilAfgift(prisFraInput: number){
+if(prisFraInput <= 200000){
+    console.log("Under 200 tusind")
+    return prisFraInput * 0.85
 }
-let user: Person = { firstName: "John", lastName: "Doe" };
-
-let element: HTMLDivElement = <HTMLDivElement> document.getElementById("content");
-element.innerHTML = greeter(user);
+else if(prisFraInput > 200000){
+    console.log("Over 200 tusind");
+    
+    return prisFraInput * 1.5 - 130000;
+}
+}
